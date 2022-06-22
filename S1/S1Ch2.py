@@ -4,4 +4,4 @@ h1 = "1c0111001f010100061a024b53535009181c"
 h2 = "686974207468652062756c6c277320657965"
 verify = "746865206b696420646f6e277420706c6179"
 
-is_strs_equal(hex_xor(h1, h2), verify)
+is_strs_equal(hex_xor(h1, h2).hex(), verify)
