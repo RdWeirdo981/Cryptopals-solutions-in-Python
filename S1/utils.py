@@ -1,5 +1,6 @@
-import numpy as np
 import pandas as pd
+import string
+import base64
 
 # verify 2 strings equal
 def is_strs_equal(s1, s2):
@@ -41,7 +42,7 @@ def get_ENfreq_table():
         freq_float = float(freq_str.replace('%',''))
         frequency.append(freq_float)
     freq_dict = dict(zip(letter, frequency))
-    freq_dict[' '] = 20.0
+    freq_dict[' '] = 10.0
     return freq_dict
 
 # input: string
@@ -54,5 +55,17 @@ def single_letter_scoring(some_str):
             score += freq_dict[char.upper()]
     return score
 
+# input: a encrypted str by a single char
+# output: highest scoring one
+def str_xor_char_attack(some_string):
+    ascii_str = string.printable
+    result_dict = {}
+    for letter in ascii_str:
+        letter_xor_input = hex_xor_single_letter(some_string, letter).decode('utf-8')
+        result_score = single_letter_scoring(letter_xor_input)
+        result_dict[(letter_xor_input, letter)] = result_score
 
+    dict_ordered = sorted(result_dict.items(), key=lambda x:x[1], reverse=True)
+    return dict_ordered[0]
+    
 # print(get_ENfreq_table())
