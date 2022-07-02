@@ -14,7 +14,5 @@ for index in range(len(strings)):
     except:
         pass
 
-# dict_ordered = sorted(result_dict.items(), key=lambda x:x[1], reverse=True)
-# print(dict_ordered[0])
 dict_ordered = sorted(result_dict.items(), key=lambda x:x[1], reverse=True)
 print(dict_ordered[0])
