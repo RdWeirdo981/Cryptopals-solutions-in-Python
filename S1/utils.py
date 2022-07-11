@@ -1,6 +1,6 @@
+from math import floor
 import pandas as pd
 import string
-import base64
 
 # verify 2 strings equal
 def is_strs_equal(s1, s2):
@@ -67,5 +67,25 @@ def str_xor_char_attack(some_string):
 
     dict_ordered = sorted(result_dict.items(), key=lambda x:x[1], reverse=True)
     return dict_ordered[0]
+
+# input: a key word and a string
+# output: an encrypted string
+def key_word_encryption(keyword, pt):
+    keyword_bytes = bytes(keyword,'utf-8')
+    pt_bytes = bytes(pt, 'utf-8')
+    len_keyword = len(keyword_bytes)
+    len_pt = len(pt_bytes)
+    keyword_ext = keyword_bytes * floor(len_pt/len_keyword)
+    len_ext = len(keyword_ext)
+    if len_ext != len_pt:
+        diff = len_pt - len_ext
+        keyword_ext = keyword_ext + keyword_bytes[:diff]
+    if len(keyword_ext) == len_pt:
+        output_bytes = bytes_xor(keyword_ext, pt_bytes)
+        return output_bytes.hex()
+    else:
+        print("Error!")
+        return
+
+        
     
-# print(get_ENfreq_table())

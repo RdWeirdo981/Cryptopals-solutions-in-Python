@@ -3,7 +3,6 @@ from utils import str_xor_char_attack
 f = open('4.txt', 'r')
 strings = f.readlines()
 f.close()
-# print(type(strings))
 
 result_dict = {}
 
@@ -15,4 +14,5 @@ for index in range(len(strings)):
         pass
 
 dict_ordered = sorted(result_dict.items(), key=lambda x:x[1], reverse=True)
+print("((line index, ('decrypted messege', 'key')), score)")
 print(dict_ordered[0])
